@@ -1,0 +1,45 @@
+group 'web-user'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.akhikhl.gretty'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    compile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.6.5'
+    compile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.6.5'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'javax.servlet.jsp.jstl', name: 'jstl-api', version: '1.2'
+    compile group: 'com.liferay', name: 'nl.captcha.simplecaptcha', version: '1.1.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    gretty 'org.apache.tomcat:tomcat-dbcp:8.0.23'
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:+'
+    }
+}
+
+gretty {
+    httpPort = 8080
+    contextPath = '/'
+    servletContainer = 'tomcat8'
+    enableNaming = true
+}
